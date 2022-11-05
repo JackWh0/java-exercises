@@ -1,6 +1,7 @@
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -15,19 +16,17 @@ State = RN - Population = 3,534,265
 
 A. Create a dictionary and list the states and their populations;
 B. Replace the population of the state of RN with 3,534,165;
-C. Check if the PB state is in the dictionary, if not add: PB -
-4,039,277;
+C. Check if the PB state is in the dictionary, if not add: PB - 4,039,277;
 D. Display the PE population;
-Display all states and their populations in the order they were
-informed;
-E. Display states and their populations in alphabetical order;
-F. Display the state with the smallest population and its amount;
-G. Display the state with the largest population and its amount;
-H. Display the sum of the population of all states;
-I. Display the population mean of this states dictionary;
-J. Remove states with population less than 4,000,000;
-K. Clear the states dictionary;
-L. Check if the dictionary is empty.
+E. Display all states and their populations in the order they were informed;
+F. Display states and their populations in alphabetical order;
+G. Display the state with the smallest population and its amount;
+H. Display the state with the largest population and its amount;
+I. Display the sum of the population of all states;
+J. Display the population mean of this states dictionary;
+K. Remove states with population less than 4,000,000;
+L. Clear the states dictionary;
+M. Check if the dictionary is empty.
  */
 public class StatesDictionaryExercise {
     public static void main(String[] args) {
@@ -62,12 +61,25 @@ public class StatesDictionaryExercise {
         System.out.printf("PE population: %,d\n", statesDictionary.get("PE"));
         System.out.println("-------------------------------------------------");
 
-        System.out.println("E. Display states and their populations in alphabetical order");
+        System.out.println("E. Display all states and their populations in the order they were informed");
+        Map<String, Integer> statesDictionaryInformedOrder = new LinkedHashMap<>() {
+            {
+                put("PE", 9616621);
+                put("AL", 3351543);
+                put("CE", 9187103);
+                put("RN", 3534165);
+                put("PB", 4039277);
+            }
+        };
+        displayStatesDictionary(statesDictionaryInformedOrder);
+        System.out.println("-------------------------------------------------");
+
+        System.out.println("F. Display states and their populations in alphabetical order");
         Map<String, Integer> statesAlphabeticalOrder = new TreeMap<>(statesDictionary);
         displayStatesDictionary(statesAlphabeticalOrder);
         System.out.println("-------------------------------------------------");
 
-        System.out.println("F. Display the state with the smallest population and its amount");
+        System.out.println("G. Display the state with the smallest population and its amount");
         int smallestPopulation = Collections.min(statesDictionary.values());
 
         for (Entry<String, Integer> state : statesDictionary.entrySet()) {
@@ -80,7 +92,7 @@ public class StatesDictionaryExercise {
         }
         System.out.println("-------------------------------------------------");
 
-        System.out.println("G. Display the state with the largest population and its amount");
+        System.out.println("H. Display the state with the largest population and its amount");
         int largestPopulation = Collections.max(statesDictionary.values());
         for (Entry<String, Integer> state : statesDictionary.entrySet()) {
             if (state.getValue() == largestPopulation) {
@@ -91,7 +103,7 @@ public class StatesDictionaryExercise {
         }
         System.out.println("-------------------------------------------------");
 
-        System.out.println("H. Display the sum of the population of all states");
+        System.out.println("I. Display the sum of the population of all states");
         int sumOfThePopulation = 0;
         for (Entry<String, Integer> state : statesDictionary.entrySet()) {
             sumOfThePopulation += state.getValue();
@@ -99,12 +111,12 @@ public class StatesDictionaryExercise {
         System.out.printf("Sum of all populations: %,d\n", sumOfThePopulation);
         System.out.println("-------------------------------------------------");
 
-        System.out.println("I. Display the population mean of this states dictionary");
+        System.out.println("J. Display the population mean of this states dictionary");
         double populationMean = sumOfThePopulation / statesDictionary.size();
         System.out.printf("Population mean: %,.2f\n", populationMean);
         System.out.println("-------------------------------------------------");
 
-        System.out.println("J. Remove states with population less than 4,000,000");
+        System.out.println("K. Remove states with population less than 4,000,000");
         Iterator<Integer> statesIterator = statesDictionary.values().iterator();
         while (statesIterator.hasNext()) {
             Integer statePopulation = statesIterator.next();
@@ -115,12 +127,12 @@ public class StatesDictionaryExercise {
         displayStatesDictionary(statesDictionary);
         System.out.println("-------------------------------------------------");
 
-        System.out.println("K. Clear the states dictionary");
+        System.out.println("L. Clear the states dictionary");
         statesDictionary.clear();
         System.out.println(statesDictionary);
         System.out.println("-------------------------------------------------");
 
-        System.out.println("L. Check if the dictionary is empty");
+        System.out.println("M. Check if the dictionary is empty");
         System.out.println("Is it empty?: " + statesDictionary.isEmpty());
     }
 
